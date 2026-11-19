@@ -1,4 +1,3 @@
-import org.junit.platform.engine.support.hierarchical.Node;
 
 public class TraversalPractice {
     /**
@@ -13,10 +12,10 @@ public class TraversalPractice {
      * @param node the root of the tree
      */
     public static void printLargeNodesPostOrder(TreeNode node) {
-        if(node == null) return;
+        if (node == null) return;
         printLargeNodesPostOrder(node.left);
         printLargeNodesPostOrder(node.right);
-        if(1000 > node.data){
+        if (node.data > 1000) {
             System.out.println(node.data);
         }
     }
@@ -32,12 +31,12 @@ public class TraversalPractice {
      * @param node the root of the tree
      */
     public static void printNegativeNodesInOrder(TreeNode node) {
-        if(node == null)return;
+        if (node == null) return;
         printNegativeNodesInOrder(node.left);
-        if(0 > node.data){
+        if (node.data < 0) {
             System.out.println(node.data);
-            printNegativeNodesInOrder(node.right);
         }
+        printNegativeNodesInOrder(node.right);
     }
 
     /**
@@ -184,12 +183,10 @@ public class TraversalPractice {
      * @return the count of branch nodes in the tree
      */
     public static int max(TreeNode node) {
-        if(node == null)return Integer.MIN_VALUE;
-        int maxx = 0;
-        if(node.data > maxx){
-            maxx = node.data;
-        }
-
-        return Integer.MIN_VALUE;
+        if (node == null) return Integer.MIN_VALUE;
+        int maxx = node.data;
+        maxx = Math.max(maxx, max(node.left));
+        maxx = Math.max(maxx, max(node.right));
+        return maxx;
     }
 }
